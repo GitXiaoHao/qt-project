@@ -1,0 +1,7 @@
+##忽视用户个性化文件
+*.user
+*.autosave
+*.exe
+
+##忽略IDE配置文件
+.vscode/

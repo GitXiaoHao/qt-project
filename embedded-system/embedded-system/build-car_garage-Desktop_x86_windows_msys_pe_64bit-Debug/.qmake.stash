@@ -1,0 +1,22 @@
+QMAKE_CXX.QT_COMPILER_STDCXX = 201402L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 9
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 2
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 0
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION
+QMAKE_CXX.INCDIRS = \
+    K:/c/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++ \
+    K:/c/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++/x86_64-w64-mingw32 \
+    K:/c/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++/backward \
+    K:/c/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include \
+    K:/c/TDM-GCC-64/include \
+    K:/c/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include-fixed \
+    K:/c/TDM-GCC-64/x86_64-w64-mingw32/include
+QMAKE_CXX.LIBDIRS = \
+    K:/c/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0 \
+    K:/c/TDM-GCC-64/lib/gcc \
+    K:/c/TDM-GCC-64/x86_64-w64-mingw32/lib \
+    K:/c/TDM-GCC-64/lib

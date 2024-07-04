@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Qml/MainWin/content/MusicPlayControlBar.qml</file>
+        <file>Qml/MainWin/content/ProgressBar.qml</file>
+        <file>Qml/MainWin/main.qml</file>
+        <file>Qml/Common/SliderBar/SliderBar.qml</file>
+        <file>Qml/Common/DoubleTriangle.qml</file>
+        <file>Qml/Common/PreOrNextButton.qml</file>
+        <file>Qml/Common/StartOrStopButton.qml</file>
+        <file>Qml/Common/Triangle.qml</file>
+        <file>Qml/FileBrowserWin/FileBrowser.qml</file>
+        <file>Qml/FileBrowserWin/content/FileBrowserBase.qml</file>
+        <file>Qml/FileBrowserWin/content/FileBrowserTitleBar.qml</file>
+        <file>Qml/FileBrowserWin/content/FileBrowserSimpleFileList.qml</file>
+        <file>Qml/FileBrowserWin/content/FileBrowserBaseDelegate.qml</file>
+        <file>Qml/MusicSearchWin/MusicSearchBar.qml</file>
+        <file>Qml/MusicSearchWin/MusicSearchRelsultsListView.qml</file>
+        <file>Qml/MainWin/content/BottomBar.qml</file>
+        <file>Qml/MainWin/content/TopMusicTitle.qml</file>
+        <file>Qml/MainWin/content/LyricsDisplayArea.qml</file>
+        <file>Qml/Common/Button/BaseButton.qml</file>
+        <file>Qml/FileBrowserWin/content/FileBrowserAddBtnBar.qml</file>
+        <file>Qml/MusicPlayListWin/MusicPlayListWin.qml</file>
+        <file>Qml/Common/MenuBar/MenuBar.qml</file>
+        <file>Qml/Common/MenuBar/MenuBaseBar.qml</file>
+        <file>Qml/MusicPlayListWin/content/MusicListContent.qml</file>
+    </qresource>
+</RCC>

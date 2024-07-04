@@ -1,0 +1,199 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html, #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+      <style>/*去除百度地图版权*/
+		.anchorBL{
+		display:none;
+		} 
+	</style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=U38e6SxDOQelpAui44zZkHxg9e6cJYdB">
+
+</script>
+    <script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+    
+<script type="text/javascript" 
+        src="qwebchannel.js">
+</script>
+
+	
+    <title>竟成电子地图</title>
+</head>
+<body>
+    <div id="allmap"></div>
+
+
+
+</body>
+</html>
+
+
+
+<script type="text/javascript">
+    try {
+
+   
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");            // 创建Map实例
+
+    //添加拖拽和缩放功能
+    map.enableScrollWheelZoom(true);
+    map.enableDragging();   
+
+    //添加控件和比例尺
+    var top_right_control = new BMap.ScaleControl({ anchor: BMAP_ANCHOR_BOTTOM_LEFT });// 左下角，添加比例尺
+    var top_right_navigation = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_BOTTOM_LEFT });  //左下角，添加默认缩放平移控件
+
+    map.addControl(top_right_control);
+    map.addControl(top_right_navigation);
+
+
+    //添加地图类型
+    var mapType1 = new BMap.MapTypeControl({ mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP] });
+    var mapType2 = new BMap.MapTypeControl({ anchor: BMAP_ANCHOR_TOP_LEFT });
+
+    //添加地图类型和缩略图
+   
+    map.addControl(mapType1);          //2D图，卫星图
+    map.addControl(mapType2);          //左上角，默认地图控件
+
+
+    //创建点
+    //map.clearOverlays();
+    var point = new BMap.Point(118.80489,31.89360);
+   //109.172565  21.4488  
+   //北京 (116.404, 39.915)
+    map.centerAndZoom(point, 12);
+    //var marker = new BMap.Marker(point);  // 创建标注
+    //map.addOverlay(marker);               // 将标注添加到地图中
+    
+    //根据IP定位城市
+    function myFun(result) {
+        var cityName = result.name;
+        map.setCenter(cityName);
+    }
+    var myCity = new BMap.LocalCity();
+    myCity.get(myFun);
+
+    //showalert(testmsg);
+
+    //对传入的经纬度进行标注：纬度，经度
+   // var Latt = 116.404;
+   // var Lott = 39.915;
+
+   // theLocation(Latt, Lott);
+   // testAlert();
+    
+    // 用经纬度设置地图中心点
+    function theLocation(Longitude,Latitude) {
+        
+        var gpsPoint = new BMap.Point(Longitude, Latitude);
+
+        //gps坐标纠偏
+        BMap.Convertor.translate(gpsPoint, 0, translateCallback);     //真实经纬度转成百度坐标
+
+
+            //map.clearOverlays();
+            //var new_point = new BMap.Point(Longitude,Latitude );
+            //var marker = new BMap.Marker(new_point);  // 创建标注
+            //map.addOverlay(marker);              // 将标注添加到地图中
+            //map.panTo(new_point);
+            //marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+
+    }
+
+    function theLocationZCF(Longitude,Latitude)
+	{
+	    //alert(Longitude + "," + Latitude); 
+	    var gpsPoint = new BMap.Point(Longitude,Latitude); 
+        map.clearOverlays(); 
+        //添加谷歌marker和label 
+        //var markergps = new BMap.Marker(gpsPoint); 
+        //map.addOverlay(markergps); //添加GPS标注 
+		//var labelgps = new BMap.Label("GPS标注",{offset:new BMap.Size(20,-10)}); 
+		//markergps.setLabel(labelgps); //添加GPS标注 
+		map.panTo(gpsPoint);
+        //markergps.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+		//gps坐标纠偏
+        BMap.Convertor.translate(gpsPoint, 0, translateCallback);     //真实经纬度转成百度坐标
+	}
+	
+    // 用经纬度设置地图中心点
+    function testAlert(msg) {
+
+        var str = new String;
+        str =  msg.toString()
+       // str = "test"
+
+        alert(str);
+    }
+
+    function enableZoomDrag()
+    {
+        //添加拖拽和缩放功能
+        map.enableScrollWheelZoom(true);
+        map.enableDragging();
+    }
+
+	//路径规划
+	function pathPlanning(Longitude1,Latitude1,Longitude2,Latitude2)
+	{
+	    map.clearOverlays(); 
+	    var p1 = new BMap.Point(Longitude1,Latitude1);
+        var p2 = new BMap.Point(Longitude2,Latitude2);
+
+        var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+        driving.search(p1, p2);
+		
+		map.panTo(p1);
+	}
+	
+	//鼠标左击事件获取GPS数据
+	map.onclick = function(e){
+	    //alert("123123123123"); ]
+		//alert(e.point.lng + "," + e.point.lat); 
+		if (typeof qt != 'undefined'){
+            new QWebChannel(qt.webChannelTransport, function(channel){
+                widget = channel.objects.widget
+                widget.map_clicked(e.point.lng, e.point.lat);
+				//alert(e.point.lng + "," + e.point.lat); 
+            });
+        }  
+	}
+	
+
+    //坐标转换完之后的回调函数
+    translateCallback = function (point) {
+	  var marker = new BMap.Marker(point); 
+	  map.addOverlay(marker);
+	  var label = new BMap.Label("百度标注",{offset:new BMap.Size(20,-10)}); 
+	  marker.setLabel(label); //添加百度label 
+	  map.panTo(point);
+	  map.setCenter(point); 
+    }
+
+    } catch (e) {
+
+        alert("地图加载失败，请检查网络！");
+
+    }
+
+
+	
+	
+   
+</script>
+
+
+
